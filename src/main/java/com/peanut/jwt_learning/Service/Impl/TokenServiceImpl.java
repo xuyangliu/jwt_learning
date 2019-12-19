@@ -19,16 +19,13 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public String getToken(User user) {
         Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.MINUTE, 1);
+        nowTime.add(Calendar.MINUTE, 1); // 设置过期时间
         Date expiresDate = nowTime.getTime();
 
-        String token="";
-        token= JWT.create()
+        return JWT.create()
                 .withAudience(user.getId().toString())
                 .withExpiresAt(expiresDate)
                 .sign(Algorithm.HMAC256(user.getPassword()));
-        System.out.println("token:" + token);
-        return token;
     }
 
 }

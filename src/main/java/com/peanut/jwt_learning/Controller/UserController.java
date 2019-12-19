@@ -33,14 +33,13 @@ public class UserController {
 
         User user = userService.one_by_name(login_user.getUsername());
         if(user == null){
-            return ResponseUtil.returnBusinessException("登录失败,用户不存在");
+            return ResponseUtil.returnBusinessException("用户不存在");
         }else {
             if (!user.getPassword().equals(user.getPassword())){
-                return ResponseUtil.returnBusinessException("登录失败,密码错误");
+                return ResponseUtil.returnBusinessException("密码错误");
             }else {
                 Map<String, Object> result = new HashMap<>();
-                String token = tokenService.getToken(user);
-                result.put("token", token);
+                result.put("token", tokenService.getToken(user));
                 return ResponseUtil.returnJson(result);
             }
         }
@@ -48,9 +47,7 @@ public class UserController {
 
     @AuthToken
     @GetMapping("/getMessage")
-    public Map<String, Object> getMessage(){
-        Map<String, Object> result = new HashMap<>();
-        result.put("message","你已通过验证");
-        return result;
+    public String getMessage(){
+        return ResponseUtil.returnJson("hello world for jwt。");
     }
 }

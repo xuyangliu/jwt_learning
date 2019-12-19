@@ -18,7 +18,7 @@ public class ResponseUtil {
     private final static String DATA = "data";
 
     public static String returnException() {
-        return returnJson("400", "server failure", null);
+        return returnJson("400", "服务器异常", null);
     }
 
     public static String returnBusinessException(String message) {
@@ -26,7 +26,7 @@ public class ResponseUtil {
     }
 
     public static String returnJson(Object data) {
-        return returnJson("200","success",data);
+        return returnJson("200","成功",data);
     }
 
     public static String returnJson(String code, String message, Object data){
