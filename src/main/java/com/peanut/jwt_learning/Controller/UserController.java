@@ -1,6 +1,7 @@
 package com.peanut.jwt_learning.Controller;
 
 import com.peanut.jwt_learning.Annotation.AuthToken;
+import com.peanut.jwt_learning.Annotation.LogAnnotation;
 import com.peanut.jwt_learning.Annotation.PassToken;
 import com.peanut.jwt_learning.Entity.User;
 import com.peanut.jwt_learning.Service.TokenService;
@@ -41,17 +42,13 @@ public class UserController {
                 Map<String, Object> result = new HashMap<>();
                 result.put("token", tokenService.getToken(user));
 
-                // 创建session时触发sessionListener的requestInitialized方法
-                // 即没有下面这句话，到这里的请求触发不了sessionListener的requestInitialized 方法
-                // 但是一般把服务器做成无状态的，即HttpSessionListener只是在此做演示作用。
-                // HttpSession session = request.getSession(true);
-
                 return ResponseUtil.returnJson(result);
             }
         }
     }
 
     @AuthToken
+    @LogAnnotation
     @GetMapping("/getMessage")
     public String getMessage(){
         return ResponseUtil.returnJson("hello world for jwt。");

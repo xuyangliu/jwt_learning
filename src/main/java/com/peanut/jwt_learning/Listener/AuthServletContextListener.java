@@ -16,13 +16,12 @@ public class AuthServletContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        //计算user view count
-        log.info("---> AuthServletContextListener.contextInitialized");
+        log.info("<--- AuthServletContextListener.contextInitialized --->");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        log.info("---> AuthServletContextListener.contextDestroyed");
+        log.info("<--- AuthServletContextListener.contextDestroyed --->");
     }
 
 }

@@ -18,15 +18,14 @@ public class AuthServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-        //计算page view count
         HttpServletRequest request = (HttpServletRequest)sre.getServletRequest();
-        log.info("---> AuthServletRequestListener.requestInitialized , uri:" + request.getRequestURI());
+        log.info("<--- AuthServletRequestListener.requestInitialized --->");
     }
 
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
         ServletContext servletContext = sre.getServletContext();
-        log.info("---> AuthServletRequestListener.requestDestroyed");
+        log.info("<--- AuthServletRequestListener.requestDestroyed --->");
     }
 }

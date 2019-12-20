@@ -25,12 +25,12 @@ public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        log.info("---> AuthFilter.init()");
+        log.info("<--- AuthFilter.init() --->");
     }
 
     @Override
     public void destroy() {
-        log.info("---> AuthFilter.destroy()");
+        log.info("<--- AuthFilter.destroy() --->");
     }
 
     @Override
@@ -38,17 +38,17 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-        log.info("---> AuthFilter.doFilter() start - "+ url);
+        log.info("<--- AuthFilter.doFilter() start --->");
 
         if (!url.endsWith("login") && request.getHeader("token") == null){
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(ResponseUtil.returnBusinessException("无token，请重新登录"));
-            log.info("---> AuthFilter.doFilter() end");
+            log.info("<--- AuthFilter.doFilter() end --->");
             return;
         }
         filterChain.doFilter(servletRequest,servletResponse);
 
-        log.info("---> AuthFilter.doFilter() end");
+        log.info("<--- AuthFilter.doFilter() end --->");
     }
 
 }

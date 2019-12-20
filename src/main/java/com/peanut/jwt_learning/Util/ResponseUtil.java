@@ -2,8 +2,8 @@ package com.peanut.jwt_learning.Util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.peanut.jwt_learning.Constant.ResponseStatus;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,18 +18,30 @@ public class ResponseUtil {
     private final static String DATA = "data";
 
     public static String returnException() {
-        return returnJson("400", "服务器异常", null);
+        return returnJson(ResponseStatus.SERVER_EXCEPTION.code(), ResponseStatus.SERVER_EXCEPTION.message(), null);
+    }
+
+    public static String returnException(String message) {
+        return returnJson(ResponseStatus.SERVER_EXCEPTION.code(), message, null);
+    }
+
+    public static String returnBusinessException() {
+        return returnJson(ResponseStatus.BUSINESS_EXCEPTION.code(), ResponseStatus.BUSINESS_EXCEPTION.message(), null);
     }
 
     public static String returnBusinessException(String message) {
-        return returnJson("400", message, null);
+        return returnJson(ResponseStatus.BUSINESS_EXCEPTION.code(), message, null);
+    }
+
+    public static String returnSuccess() {
+        return returnJson(ResponseStatus.SUCCESS.code(), ResponseStatus.SUCCESS.message(),null);
     }
 
     public static String returnJson(Object data) {
-        return returnJson("200","成功",data);
+        return returnJson(ResponseStatus.SUCCESS.code(), ResponseStatus.SUCCESS.message(),data);
     }
 
-    public static String returnJson(String code, String message, Object data){
+    public static String returnJson(Integer code, String message, Object data){
 
         String resultJson = "";
         Map<String, Object> result = new HashMap<>();

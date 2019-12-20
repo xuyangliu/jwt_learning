@@ -17,12 +17,12 @@ public class AuthHttpSessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        log.info("---> AuthHttpSessionListener.sessionCreated");
+        log.info("<--- AuthHttpSessionListener.sessionCreated --->");
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        log.info("---> AuthHttpSessionListener.sessionDestroyed");
+        log.info("<--- AuthHttpSessionListener.sessionDestroyed --->");
     }
 
 }

@@ -32,7 +32,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.info("---> AuthInterceptor.preHandle");
+        log.info("<--- AuthInterceptor.preHandle --->");
 
         if (!(handler instanceof HandlerMethod)) {
             return true;
@@ -56,12 +56,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("---> AuthInterceptor.postHandle");
+        log.info("<--- AuthInterceptor.postHandle --->");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info("---> AuthInterceptor.afterCompletion");
+        log.info("<--- AuthInterceptor.afterCompletion --->");
     }
 
 }
