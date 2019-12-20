@@ -10,4 +10,6 @@ public interface TokenService {
 
     String getToken(User user);
 
+    Boolean checkToken(String token);
+
 }

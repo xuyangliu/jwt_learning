@@ -2,6 +2,7 @@ package com.peanut.jwt_learning.Interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,8 +18,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");    // 拦截所有请求
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
+
     @Bean
-    public AuthenticationInterceptor authenticationInterceptor() {
-        return new AuthenticationInterceptor();
+    public AuthInterceptor authenticationInterceptor() {
+        return new AuthInterceptor();
     }
 }
