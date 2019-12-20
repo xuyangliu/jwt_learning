@@ -8,6 +8,7 @@ import com.peanut.jwt_learning.Service.TokenService;
 import com.peanut.jwt_learning.Service.UserService;
 import com.peanut.jwt_learning.Util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,8 +29,12 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
-    @PassToken
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+
     @PostMapping("/login")
+    @PassToken
     public String login(@RequestBody User login_user){
 
         User user = userService.one_by_name(login_user.getUsername());
@@ -47,10 +52,12 @@ public class UserController {
         }
     }
 
-    @AuthToken
+
     @LogAnnotation
     @GetMapping("/getMessage")
+    @AuthToken
     public String getMessage(){
-        return ResponseUtil.returnJson("hello world for jwt。");
+        return ResponseUtil.returnJson(redisTemplate.opsForValue().get("type"));
+//        return ResponseUtil.returnJson("hello world for jwt。");
     }
 }

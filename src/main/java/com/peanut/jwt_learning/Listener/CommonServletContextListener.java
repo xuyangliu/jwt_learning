@@ -10,18 +10,18 @@ import javax.servlet.ServletContextListener;
  * @author Kenny Liu
  * @version 2019-12-20
  **/
-public class AuthServletContextListener implements ServletContextListener {
+public class CommonServletContextListener implements ServletContextListener {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthServletContextListener.class);
+    private static final Logger log = LoggerFactory.getLogger(CommonServletContextListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        log.info("<--- AuthServletContextListener.contextInitialized --->");
+        log.info("<--- CommonServletContextListener.contextInitialized --->");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        log.info("<--- AuthServletContextListener.contextDestroyed --->");
+        log.info("<--- CommonServletContextListener.contextDestroyed --->");
     }
 
 }

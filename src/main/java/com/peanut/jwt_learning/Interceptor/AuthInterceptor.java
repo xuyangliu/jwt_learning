@@ -1,9 +1,5 @@
 package com.peanut.jwt_learning.Interceptor;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.peanut.jwt_learning.Annotation.AuthToken;
 import com.peanut.jwt_learning.Annotation.PassToken;
 import com.peanut.jwt_learning.Service.TokenService;
@@ -17,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.Optional;
 
 /**
  * @author Kenny Liu
@@ -25,10 +20,10 @@ import java.util.Optional;
  **/
 public class AuthInterceptor implements HandlerInterceptor {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthInterceptor.class);
-
     @Autowired
     private TokenService tokenService;
+
+    private static final Logger log = LoggerFactory.getLogger(AuthInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -63,5 +58,4 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         log.info("<--- AuthInterceptor.afterCompletion --->");
     }
-
 }

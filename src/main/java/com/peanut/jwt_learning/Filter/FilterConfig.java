@@ -20,10 +20,10 @@ public class FilterConfig {
 
     @Bean
     public FilterRegistrationBean authFilterRegistrationBean(){
-        FilterRegistrationBean filterRegistrationBean=new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(authFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.setOrder(1);
-        return filterRegistrationBean;
+        FilterRegistrationBean authFilterRegistrationBean=new FilterRegistrationBean();
+        authFilterRegistrationBean.setFilter(authFilter());
+        authFilterRegistrationBean.addUrlPatterns("/*");
+        authFilterRegistrationBean.setOrder(1);
+        return authFilterRegistrationBean;
     }
 }

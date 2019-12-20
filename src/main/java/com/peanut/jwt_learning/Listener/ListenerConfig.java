@@ -13,20 +13,20 @@ import org.springframework.context.annotation.Configuration;
 public class ListenerConfig {
 
     @Bean
-    public ServletListenerRegistrationBean authServletContextListener(){
-        ServletListenerRegistrationBean<AuthServletContextListener> authServletContextListener = new ServletListenerRegistrationBean<>(new AuthServletContextListener());
-        return authServletContextListener;
+    public ServletListenerRegistrationBean commonServletContextListener(){
+        ServletListenerRegistrationBean<CommonServletContextListener> commonServletContextListener = new ServletListenerRegistrationBean<>(new CommonServletContextListener());
+        return commonServletContextListener;
     }
 
     @Bean
-    public ServletListenerRegistrationBean authServletRequestListener(){
-        ServletListenerRegistrationBean<AuthServletRequestListener> authServletRequestListener = new ServletListenerRegistrationBean<>(new AuthServletRequestListener());
-        return authServletRequestListener;
+    public ServletListenerRegistrationBean commonServletRequestListener(){
+        ServletListenerRegistrationBean<CommonServletRequestListener> commonServletRequestListener = new ServletListenerRegistrationBean<>(new CommonServletRequestListener());
+        return commonServletRequestListener;
     }
 
     @Bean
-    public ServletListenerRegistrationBean authHttpSessionListener(){
-        ServletListenerRegistrationBean<AuthHttpSessionListener> authHttpSessionListener = new ServletListenerRegistrationBean<>(new AuthHttpSessionListener());
-        return authHttpSessionListener;
+    public ServletListenerRegistrationBean commonHttpSessionListener(){
+        ServletListenerRegistrationBean<CommonHttpSessionListener> commonHttpSessionListener = new ServletListenerRegistrationBean<>(new CommonHttpSessionListener());
+        return commonHttpSessionListener;
     }
 }

@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletRequest;
  * @author Kenny Liu
  * @version 2019-12-20
  **/
-public class AuthServletRequestListener implements ServletRequestListener {
+public class CommonServletRequestListener implements ServletRequestListener {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthServletContextListener.class);
+    private static final Logger log = LoggerFactory.getLogger(CommonServletContextListener.class);
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
         HttpServletRequest request = (HttpServletRequest)sre.getServletRequest();
-        log.info("<--- AuthServletRequestListener.requestInitialized --->");
+        log.info("<--- CommonServletRequestListener.requestInitialized --->");
     }
 
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
         ServletContext servletContext = sre.getServletContext();
-        log.info("<--- AuthServletRequestListener.requestDestroyed --->");
+        log.info("<--- CommonServletRequestListener.requestDestroyed --->");
     }
 }

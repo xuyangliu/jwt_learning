@@ -4,7 +4,6 @@ import com.peanut.jwt_learning.Service.TokenService;
 import com.peanut.jwt_learning.Util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.*;
 import javax.servlet.FilterConfig;
@@ -19,9 +18,6 @@ import java.io.IOException;
 public class AuthFilter implements Filter {
 
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
-
-    @Autowired
-    private TokenService tokenService;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -43,7 +39,7 @@ public class AuthFilter implements Filter {
         if (!url.endsWith("login") && request.getHeader("token") == null){
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(ResponseUtil.returnBusinessException("无token，请重新登录"));
-            log.info("<--- AuthFilter.doFilter() end --->");
+            log.info("<--- AuthFilter.doFilter() login or without token --->");
             return;
         }
         filterChain.doFilter(servletRequest,servletResponse);
