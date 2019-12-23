@@ -46,6 +46,7 @@ public class UserController {
             }else {
                 Map<String, Object> result = new HashMap<>();
                 result.put("token", tokenService.getToken(user));
+                result.put("uid", user.getId());
 
                 return ResponseUtil.returnJson(result);
             }
@@ -56,8 +57,8 @@ public class UserController {
     @LogAnnotation
     @GetMapping("/getMessage")
     @AuthToken
-    public String getMessage(){
-        return ResponseUtil.returnJson(redisTemplate.opsForValue().get("type"));
+    public String getMessage(@RequestHeader(value="uid") String uid){
+        return ResponseUtil.returnJson(redisTemplate.opsForValue().get("type") + "-" + uid);
 //        return ResponseUtil.returnJson("hello world for jwt。");
     }
 }

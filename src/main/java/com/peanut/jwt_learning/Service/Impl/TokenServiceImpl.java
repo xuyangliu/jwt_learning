@@ -52,6 +52,7 @@ public class TokenServiceImpl implements TokenService {
         } catch (JWTVerificationException e) {
             throw new AuthException("token 内容验证失败");
         }
+
         return true;
     }
 
