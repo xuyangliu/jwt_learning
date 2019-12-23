@@ -9,11 +9,13 @@ import com.peanut.jwt_learning.Exception.AuthException;
 import com.peanut.jwt_learning.Service.TokenService;
 import com.peanut.jwt_learning.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kenny Liu
@@ -25,16 +27,22 @@ public class TokenServiceImpl implements TokenService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public String getToken(User user) {
         Calendar nowTime = Calendar.getInstance();
         nowTime.add(Calendar.MINUTE, 1); // 设置过期时间
         Date expiresDate = nowTime.getTime();
-
-        return JWT.create()
+        String token = JWT.create()
                 .withAudience(user.getId().toString())
                 .withExpiresAt(expiresDate)
                 .sign(Algorithm.HMAC256(user.getPassword()));
+
+//        redisTemplate.opsForValue().set(user.getId().toString(),token,60 , TimeUnit.SECONDS);
+
+        return token;
     }
 
     @Override
