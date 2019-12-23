@@ -1,9 +1,14 @@
 data-source:
   mysql:
-    url: jdbc:mysql://127.0.0.1:3306/peanut?serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/appointment?serverTimezone=UTC
     username: root
     password: xuyangliu99.
     driver-class-name: com.mysql.cj.jdbc.Driver
+  postgresql:
+    url: jdbc:postgresql://192.168.5.221:28466/dw
+    username: postgres
+    password: abc@123
+    driver-class-name: org.postgresql.Driver
   redis:
     host: 192.168.5.162
     port: 6379

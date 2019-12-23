@@ -22,32 +22,33 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 public class RedisConfig {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthExceptionHandler.class);
-
     @Autowired
     private RedisProperty redisProperty;
 
     @Bean
     public JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+
         jedisPoolConfig.setMaxTotal(redisProperty.getMaxActive());
         jedisPoolConfig.setMaxTotal(redisProperty.getMaxIdle());
         jedisPoolConfig.setMinIdle(redisProperty.getMinIdle());
         jedisPoolConfig.setMaxWaitMillis(redisProperty.getMaxWait());
+
         return jedisPoolConfig;
     }
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory(JedisPoolConfig jedisPoolConfig){
         // Standalone,Sentinel和RedisCluster三种模式
-        RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration();
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+
         redisStandaloneConfiguration.setHostName(redisProperty.getHost());
         redisStandaloneConfiguration.setDatabase(redisProperty.getDatabase());
         redisStandaloneConfiguration.setPort(redisProperty.getPort());
 
         JedisClientConfiguration.JedisPoolingClientConfigurationBuilder builder =
                 (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder)JedisClientConfiguration.builder();
+
         builder.poolConfig(jedisPoolConfig);
 
         return new JedisConnectionFactory(redisStandaloneConfiguration, builder.build());
