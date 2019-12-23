@@ -14,9 +14,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User one_by_id(int id) {
         if (id == 1){
-            return new User().setId(1).setUsername("kenny").setPassword("123456");
+            return new User().setId(1).setUsername("kenny").setPassword("e10adc3949ba59abbe56e057f20f883e");
         } else {
-            return new User().setId(2).setUsername("mike").setPassword("654321");
+            return new User().setId(2).setUsername("mike").setPassword("c33367701511b4f6020ec61ded352059");
         }
 
     }
@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User one_by_name(String username) {
         if (username.equals("kenny")){
-            return new User().setId(1).setUsername("kenny").setPassword("123456");
+            return new User().setId(1).setUsername("kenny").setPassword("e10adc3949ba59abbe56e057f20f883e");
         } else {
-            return new User().setId(2).setUsername("mike").setPassword("654321");
+            return new User().setId(2).setUsername("mike").setPassword("c33367701511b4f6020ec61ded352059");
         }
     }
 

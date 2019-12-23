@@ -2,7 +2,7 @@ package com.peanut.jwt_learning.Interceptor;
 
 import com.peanut.jwt_learning.Annotation.AuthToken;
 import com.peanut.jwt_learning.Annotation.PassToken;
-import com.peanut.jwt_learning.Service.TokenService;
+import com.peanut.jwt_learning.Service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 public class AuthInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private TokenService tokenService;
+    private AuthService authService;
 
     private static final Logger log = LoggerFactory.getLogger(AuthInterceptor.class);
 
@@ -43,7 +43,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (method.isAnnotationPresent(AuthToken.class)) {
             AuthToken authToken = method.getAnnotation(AuthToken.class);
             if (authToken.required()) {
-                return tokenService.checkToken(request.getHeader("token"));
+                return authService.checkToken(request.getHeader("token"));
             }
         }
         return true;

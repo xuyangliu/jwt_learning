@@ -4,7 +4,7 @@ import com.peanut.jwt_learning.Annotation.AuthToken;
 import com.peanut.jwt_learning.Annotation.LogAnnotation;
 import com.peanut.jwt_learning.Annotation.PassToken;
 import com.peanut.jwt_learning.Entity.User;
-import com.peanut.jwt_learning.Service.TokenService;
+import com.peanut.jwt_learning.Service.AuthService;
 import com.peanut.jwt_learning.Service.UserService;
 import com.peanut.jwt_learning.Util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private TokenService tokenService;
+    private AuthService authService;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -41,11 +41,11 @@ public class UserController {
         if(user == null){
             return ResponseUtil.returnBusinessException("用户不存在");
         }else {
-            if (!user.getPassword().equals(user.getPassword())){
+            if (authService.checkPassword(login_user.getPassword(), user.getPassword())){
                 return ResponseUtil.returnBusinessException("密码错误");
             }else {
                 Map<String, Object> result = new HashMap<>();
-                result.put("token", tokenService.getToken(user));
+                result.put("token", authService.getToken(user));
                 result.put("uid", user.getId());
 
                 return ResponseUtil.returnJson(result);

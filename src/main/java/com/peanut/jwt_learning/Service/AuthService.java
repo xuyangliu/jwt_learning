@@ -6,10 +6,12 @@ import com.peanut.jwt_learning.Entity.User;
  * @author Kenny Liu
  * @version 2019-12-19
  **/
-public interface TokenService {
+public interface AuthService {
 
     String getToken(User user);
 
-    Boolean checkToken(String token);
+    boolean checkToken(String token);
+
+    boolean checkPassword(String login_password, String true_password);
 
 }

@@ -6,8 +6,9 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.peanut.jwt_learning.Entity.User;
 import com.peanut.jwt_learning.Exception.AuthException;
-import com.peanut.jwt_learning.Service.TokenService;
+import com.peanut.jwt_learning.Service.AuthService;
 import com.peanut.jwt_learning.Service.UserService;
+import com.peanut.jwt_learning.Util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,13 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Kenny Liu
  * @version 2019-12-19
  **/
 @Service
-public class TokenServiceImpl implements TokenService {
+public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private UserService userService;
@@ -46,7 +46,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public Boolean checkToken(String token) {
+    public boolean checkToken(String token) {
         try {
             // 1. 验证 token 格式是否正确。
             int uid = Integer.parseInt(JWT.decode(token).getAudience().get(0));
@@ -62,6 +62,11 @@ public class TokenServiceImpl implements TokenService {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean checkPassword(String login_password, String true_password){
+        return MD5Util.md5(login_password).equals(true_password);
     }
 
 }
